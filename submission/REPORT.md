@@ -4,13 +4,13 @@
 
 ## 1. Thông tin học viên
 
-- **Họ và tên:**
-- **MSSV:**
+- **Họ và tên:** Trần Tuấn Cường
+- **MSSV:** 2A202602717
 - **Lớp:** K4-L3B
-- **Repository URL:**
+- **Repository URL:** https://github.com/CuongTT-04/K4-L3-DAY13-TranTuanCuong-2A202602717-Monitoring-LLMOps
 - **Commit SHA cuối:**
 - **Challenge ID:**
-- **Tên project Langfuse cá nhân:** `day13-k4-l3b-<MSSV>`
+- **Tên project Langfuse cá nhân:** `day13-k4-l3b-2A202602717`
 
 ## 2. Evidence index
 
