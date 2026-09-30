@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>K4-L3B Day 13 Monitoring &amp; LLMOps Dashboard</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      margin: 0;
+      padding: 24px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    h1 { margin: 0; font-size: 24px; color: #58a6ff; }
+    .meta { font-size: 13px; color: #8b949e; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .panel {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 18px;
+      position: relative;
+    }
+    .panel h2 {
+      font-size: 15px;
+      margin: 0 0 12px 0;
+      color: #f0f6fc;
+      display: flex;
+      justify-content: space-between;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #238636;
+      color: #fff;
+    }
+    .stat-main {
+      font-size: 32px;
+      font-weight: 700;
+      color: #58a6ff;
+      margin: 10px 0;
+    }
+    .unit { font-size: 14px; color: #8b949e; font-weight: normal; }
+    .details {
+      font-size: 13px;
+      color: #8b949e;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 12px;
+      border-top: 1px solid #21262d;
+      padding-top: 10px;
+    }
+    .threshold {
+      margin-top: 12px;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      background: #1f242c;
+      color: #7ee787;
+      border-left: 3px solid #238636;
+    }
+    .bar-wrap {
+      background: #21262d;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: #58a6ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h1>K4-L3B Day 13 Monitoring &amp; LLMOps Dashboard</h1>
+      <div class="meta">Service: day13-l3b-monitoring-llmops-lab | Time range: 60m | Refresh: 30s</div>
+    </div>
+    <div class="meta" style="text-align: right;">
+      Status: <span class="badge">HEALTHY</span><br>
+      Student ID: 2A202602717
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Panel 1: Latency -->
+    <div class="panel">
+      <h2>Latency percentiles &amp; TTFT <span class="badge">p95 &le; 3000ms</span></h2>
+      <div class="stat-main">157.6 <span class="unit">ms (P95)</span></div>
+      <div class="details">
+        <div>P50: <strong>151.0 ms</strong></div>
+        <div>P99: <strong>157.9 ms</strong></div>
+        <div>TTFT P95: <strong>53.3 ms</strong></div>
+        <div>Samples: <strong>10</strong></div>
+      </div>
+      <div class="threshold">&bull; Threshold: P95 &le; 3000 ms (PASS)</div>
+    </div>
+
+    <!-- Panel 2: Traffic -->
+    <div class="panel">
+      <h2>Request Traffic <span class="badge">&ge; 1 req/min</span></h2>
+      <div class="stat-main">10 <span class="unit">requests</span></div>
+      <div class="details">
+        <div>Rate: <strong>10.0 req/min</strong></div>
+        <div>Window: <strong>60 minutes</strong></div>
+      </div>
+      <div class="threshold">&bull; Threshold: Rate &ge; 1 req/min (PASS)</div>
+    </div>
+
+    <!-- Panel 3: Errors -->
+    <div class="panel">
+      <h2>Error Rate &amp; Retrieval <span class="badge">&le; 2%</span></h2>
+      <div class="stat-main">0.0% <span class="unit">error rate</span></div>
+      <div class="details">
+        <div>Retrieval success: <strong>100.0%</strong></div>
+        <div>Errors: <strong>0</strong></div>
+      </div>
+      <div class="threshold">&bull; Threshold: Error rate &le; 2%, Retrieval &ge; 90% (PASS)</div>
+    </div>
+
+    <!-- Panel 4: Cost -->
+    <div class="panel">
+      <h2>Cost over time <span class="badge">&le; $2.50</span></h2>
+      <div class="stat-main">$0.0203 <span class="unit">USD</span></div>
+      <div class="details">
+        <div>Model: <strong>claude-sonnet-4-5</strong></div>
+        <div>Budget limit: <strong>$2.50</strong></div>
+      </div>
+      <div class="threshold">&bull; Threshold: Total cost &le; $2.50 (PASS)</div>
+    </div>
+
+    <!-- Panel 5: Tokens -->
+    <div class="panel">
+      <h2>Input &amp; Output Tokens <span class="badge">&le; 50k</span></h2>
+      <div class="stat-main">1,626 <span class="unit">tokens</span></div>
+      <div class="details">
+        <div>Tokens In: <strong>338</strong></div>
+        <div>Tokens Out: <strong>1,288</strong></div>
+      </div>
+      <div class="threshold">&bull; Threshold: Sum tokens &le; 50,000 (PASS)</div>
+    </div>
+
+    <!-- Panel 6: Quality -->
+    <div class="panel">
+      <h2>Quality Proxy <span class="badge">&ge; 0.75</span></h2>
+      <div class="stat-main">0.88 <span class="unit">/ 1.0</span></div>
+      <div class="details">
+        <div>Evaluation: <strong>Heuristic</strong></div>
+        <div>Min target: <strong>0.75</strong></div>
+      </div>
+      <div class="threshold">&bull; Threshold: Mean quality &ge; 0.75 (PASS)</div>
+    </div>
+  </div>
+</body>
+</html>
